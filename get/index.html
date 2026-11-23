@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Deep Time: Idle Excavation</title>
+<meta name="description" content="Dig up fossils, build your museum. An archaeology idle game for iPhone, iPad and Android.">
+<meta property="og:title" content="Deep Time: Idle Excavation">
+<meta property="og:description" content="Dig up fossils, build your museum. An archaeology idle game for iPhone, iPad and Android.">
+<meta property="og:image" content="https://joanmarcs.github.io/deeptime/get/icon.png">
+<meta property="og:url" content="https://joanmarcs.github.io/deeptime/get/">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<script>
+// Store links. Set a platform to true once the game is live there; until then this page
+// shows "coming soon" for it instead of sending people to an unavailable store page.
+var LIVE = { ios: false, android: false };
+var STORE = {
+  ios: "https://apps.apple.com/app/id6836371590",
+  android: "https://play.google.com/store/apps/details?id=com.jmss.deeptimegame"
+};
+(function () {
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  // iPadOS reports itself as a Mac; a touch screen tells them apart.
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var target = isIOS ? "ios" : isAndroid ? "android" : null;
+  if (target && LIVE[target] && !/[?&]stay\b/.test(location.search)) location.replace(STORE[target]);
+})();
+</script>
+<style>
+:root { --bg: #faf7f2; --fg: #2b2620; --muted: #6b6258; --accent: #8a4b1f; --on-accent: #ffffff; --card: #ffffff; --line: #e3dcd2; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1a1715; --fg: #ece6de; --muted: #a59b90; --accent: #e0a36f; --on-accent: #1a1715; --card: #24201d; --line: #3a342f; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 1.0625rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.wrap { max-width: 28rem; margin: 0 auto; padding: 2.5rem max(1rem, env(safe-area-inset-right)) 3rem max(1rem, env(safe-area-inset-left)); text-align: center; }
+img { width: 128px; height: 128px; border-radius: 28px; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+h1 { font-size: 1.625rem; line-height: 1.25; margin: 1.25rem 0 .25rem; }
+p { margin: .5rem 0 1.5rem; color: var(--muted); }
+.btn { display: block; margin: .75rem 0; padding: .875rem 1rem; border-radius: .75rem; background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
+.btn.soon { background: var(--card); color: var(--muted); border: 1px solid var(--line); pointer-events: none; }
+.btn:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
+footer { margin-top: 2rem; font-size: .9375rem; }
+footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main class="wrap">
+<img src="icon.png" alt="" width="128" height="128">
+<h1>Deep Time: Idle Excavation</h1>
+<p>Dig up fossils, build your museum.</p>
+<a class="btn" id="ios" href="https://apps.apple.com/app/id6836371590">App Store · iPhone &amp; iPad</a>
+<a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.jmss.deeptimegame">Google Play · Android</a>
+<footer><a href="../support/">Support</a> · <a href="../">Privacy</a></footer>
+</main>
+<script>
+["ios", "android"].forEach(function (k) {
+  if (LIVE[k]) return;
+  var a = document.getElementById(k);
+  a.classList.add("soon");
+  a.removeAttribute("href");
+  a.setAttribute("aria-disabled", "true");
+  a.textContent += " · coming soon";
+});
+</script>
+</body>
+</html>
